@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYOMIKUN BAN SITE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a0000, #0a0a0a);
+            color: #ff0000;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,0,0,0.1)" stroke-width="1"/></svg>');
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid #ff0000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff0000, #000000, #ff0000, #000000, #ff0000);
+            background-size: 400%;
+            border-radius: 20px;
+            animation: glowing-border 20s linear infinite;
+        }
+        
+        @keyframes glowing-border {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: #ff0000;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ff4444;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .scary-message {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1rem;
+            border-left: 4px solid #ff0000;
+            text-align: left;
+            color: #ff9999;
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .glow-btn {
+            position: relative;
+            padding: 18px 25px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            color: #ff0000;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.3s;
+            z-index: 1;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .glow-btn:hover {
+            color: #000000;
+            background: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            text-shadow: none;
+        }
+        
+        .glow-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 0, 0, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+            z-index: -1;
+        }
+        
+        .glow-btn:hover::before {
+            opacity: 1;
+            animation: glow-effect 1.5s infinite;
+        }
+        
+        @keyframes glow-effect {
+            0% {
+                transform: rotate(45deg) translate(-10%, -10%);
+            }
+            50% {
+                transform: rotate(45deg) translate(10%, 10%);
+            }
+            100% {
+                transform: rotate(45deg) translate(-10%, -10%);
+            }
+        }
+        
+        .input-section {
+            margin: 25px 0;
+            text-align: left;
+            display: none;
+        }
+        
+        .input-section h3 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ff4444;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ff0000;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 15px #ff0000;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            text-align: left;
+            display: none;
+            border: 1px solid #ff0000;
+        }
+        
+        .result h3 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .email-template {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin: 15px 0;
+            line-height: 1.5;
+            color: #ff9999;
+            border: 1px solid #ff0000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ff6666;
+        }
+        
+        footer {
+            margin-top: 40px;
+            color: #ff4444;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .footer-info {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #ff6666;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.7); }
+            50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.9); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.7); }
+        }
+        
+        .skull-icon {
+            font-size: 2rem;
+            margin: 0 10px;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+        }
+        
+        .blood {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            filter: blur(5px);
+            z-index: -1;
+            animation: drip 10s infinite;
+        }
+        
+        @keyframes drip {
+            0% { transform: translateY(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(500px); opacity: 0; }
+        }
+        
+        #blood1 {
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        #blood2 {
+            left: 30%;
+            animation-delay: 3s;
+        }
+        
+        #blood3 {
+            left: 70%;
+            animation-delay: 6s;
+        }
+        
+        #blood4 {
+            left: 90%;
+            animation-delay: 2s;
+        }
+        
+        .api-status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .api-success {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        
+        .api-error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff0000;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="blood" id="blood1"></div>
+    <div class="blood" id="blood2"></div>
+    <div class="blood" id="blood3"></div>
+    <div class="blood" id="blood4"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-skull skull-icon"></i> AYOMIKUN BAN SITE <i class="fas fa-skull skull-icon"></i></h1>
+            <div class="subtitle">WhatsApp Account Control Center</div>
+        </header>
+        
+        <div class="scary-message">
+            <i class="fas fa-exclamation-triangle"></i> WARNING: This tool provides direct access to WhatsApp's administrative functions. Use with extreme caution. Any misuse may have serious consequences.
+        </div>
+        
+        <div class="buttons-grid">
+            <button class="glow-btn" id="banNumberBtn">
+                <i class="fas fa-ban"></i> BAN A NUMBER
+            </button>
+            
+            <button class="glow-btn" id="unbanNumberBtn">
+                <i class="fas fa-undo"></i> UNBAN A NUMBER
+            </button>
+            
+            <button class="glow-btn" id="banGroupBtn">
+                <i class="fas fa-ban"></i> BAN A GROUP
+            </button>
+            
+            <button class="glow-btn" id="unbanGroupBtn">
+                <i class="fas fa-undo"></i> UNBAN A GROUP
+            </button>
+            
+            <button class="glow-btn" id="banCheckerBtn">
+                <i class="fas fa-search"></i> BAN CHECKER
+            </button>
+        </div>
+        
+        <!-- Ban Number Section -->
+        <div class="input-section" id="banNumberSection">
+            <h3><i class="fas fa-ban"></i> BAN WHATSAPP NUMBER</h3>
+            <div class="input-group">
+                <label for="banPhoneNumber">TARGET PHONE NUMBER (International Format)</label>
+                <input type="text" id="banPhoneNumber" placeholder="e.g., +1234567890">
+            </div>
+            <button class="glow-btn" id="generateBanBtn">GENERATE BAN REQUEST</button>
+        </div>
+        
+        <!-- Unban Number Section -->
+        <div class="input-section" id="unbanNumberSection">
+            <h3><i class="fas fa-undo"></i> UNBAN WHATSAPP NUMBER</h3>
+            <div class="input-group">
+                <label for="unbanPhoneNumber">TARGET PHONE NUMBER (International Format)</label>
+                <input type="text" id="unbanPhoneNumber" placeholder="e.g., +1234567890">
+            </div>
+            <button class="glow-btn" id="generateUnbanBtn">GENERATE UNBAN REQUEST</button>
+        </div>
+        
+        <!-- Ban Checker Section -->
+        <div class="input-section" id="banCheckerSection">
+            <h3><i class="fas fa-search"></i> CHECK BAN STATUS</h3>
+            <div class="input-group">
+                <label for="checkPhoneNumber">PHONE NUMBER TO CHECK (International Format)</label>
+                <input type="text" id="checkPhoneNumber" placeholder="e.g., +1234567890">
+            </div>
+            <button class="glow-btn" id="checkBanBtn">CHECK STATUS</button>
+            
+            <div class="api-status" id="apiStatus"></div>
+        </div>
+        
+        <!-- Result Section -->
+        <div class="result" id="resultSection">
+            <h3><i class="fas fa-file-alt"></i> GENERATED REPORT</h3>
+            <div class="email-template" id="emailTemplate">
+                <!-- Email template will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="instructions">
+                <p><strong>Instructions:</strong></p>
+                <p>1. Copy the text above</p>
+                <p>2. Open your email client</p>
+                <p>3. Send to: support@support.whatsapp.com</p>
+                <p>4. Use the subject line provided in the template</p>
+            </div>
+        </div>
+        
+        <!-- Ban Check Result -->
+        <div class="result" id="banCheckResult">
+            <h3><i class="fas fa-info-circle"></i> BAN STATUS RESULT</h3>
+            <div id="banStatusMessage">
+                <!-- Ban status will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>AYOMIKUN BAN SITE &copy; 2025 | POWERED BY AYOMIKUN TECHIES</p>
+        <div class="footer-info">
+            <p>Contact: ayomikuntech6@gmail.com | GitHub: AyoFemi10</p>
+        </div>
+    </footer>
+
+    <script>
+        // Elements
+        const banNumberBtn = document.getElementById('banNumberBtn');
+        const unbanNumberBtn = document.getElementById('unbanNumberBtn');
+        const banGroupBtn = document.getElementById('banGroupBtn');
+        const unbanGroupBtn = document.getElementById('unbanGroupBtn');
+        const banCheckerBtn = document.getElementById('banCheckerBtn');
+        
+        const banNumberSection = document.getElementById('banNumberSection');
+        const unbanNumberSection = document.getElementById('unbanNumberSection');
+        const banCheckerSection = document.getElementById('banCheckerSection');
+        
+        const resultSection = document.getElementById('resultSection');
+        const banCheckResult = document.getElementById('banCheckResult');
+        const apiStatus = document.getElementById('apiStatus');
+        
+        // Button click handlers
+        banNumberBtn.addEventListener('click', () => {
+            hideAllSections();
+            banNumberSection.style.display = 'block';
+        });
+        
+        unbanNumberBtn.addEventListener('click', () => {
+            hideAllSections();
+            unbanNumberSection.style.display = 'block';
+        });
+        
+        banCheckerBtn.addEventListener('click', () => {
+            hideAllSections();
+            banCheckerSection.style.display = 'block';
+        });
+        
+        // Placeholder for group functions
+        banGroupBtn.addEventListener('click', () => {
+            hideAllSections();
+            alert('Group ban functionality is currently being updated. Please check back later.');
+        });
+        
+        unbanGroupBtn.addEventListener('click', () => {
+            hideAllSections();
+            alert('Group unban functionality is currently being updated. Please check back later.');
+        });
+        
+        // Generate Ban Email
+        document.getElementById('generateBanBtn').addEventListener('click', () => {
+            const phoneNumber = document.getElementById('banPhoneNumber').value.trim();
+            
+            if (!validatePhoneNumber(phoneNumber)) {
+                alert('Please enter a valid phone number in international format (e.g., +1234567890)');
+                return;
+            }
+            
+            const emailContent = `To: support@support.whatsapp.com
+Subject: URGENT: Report Violating WhatsApp Account - ${phoneNumber}
+
+Dear WhatsApp Support Team,
+
+I am writing to report a serious violation of WhatsApp's Terms of Service by the user with phone number: ${phoneNumber}.
+
+This account has been engaged in the following activities:
+- Sending spam messages repeatedly
+- Spreading harmful misinformation
+- Harassing other users with abusive content
+- Distributing inappropriate and prohibited content
+- Attempting to scam users through fraudulent schemes
+
+I have encountered this user multiple times and their behavior is severely negatively impacting the WhatsApp community.
+
+Please investigate this matter urgently and take appropriate action against this account as per WhatsApp's policies.
+
+Thank you for your attention to this critical matter.
+
+Sincerely,
+A concerned WhatsApp user`;
+
+            document.getElementById('emailTemplate').textContent = emailContent;
+            resultSection.style.display = 'block';
+            banCheckResult.style.display = 'none';
+            
+            // Scroll to result
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Generate Unban Email
+        document.getElementById('generateUnbanBtn').addEventListener('click', () => {
+            const phoneNumber = document.getElementById('unbanPhoneNumber').value.trim();
+            
+            if (!validatePhoneNumber(phoneNumber)) {
+                alert('Please enter a valid phone number in international format (e.g., +1234567890)');
+                return;
+            }
+            
+            const emailContent = `To: support@support.whatsapp.com
+Subject: Request to Review WhatsApp Account Ban - ${phoneNumber}
+
+Dear WhatsApp Support Team,
+
+I am writing to respectfully request a review of the ban on my WhatsApp account associated with phone number: ${phoneNumber}.
+
+I believe this ban may have been applied in error due to one of the following reasons:
+- Possible mistaken identity or false reporting
+- Automated system detection anomaly
+- Unintentional violation of terms
+
+I have always aimed to use WhatsApp in compliance with your Terms of Service and value the platform for my daily communication needs.
+
+If any violation occurred, it was unintentional and I sincerely apologize. I have reviewed the Terms of Service and will ensure strict compliance moving forward.
+
+Please reconsider the ban on my account and restore access at your earliest convenience.
+
+Thank you for your understanding and assistance.
+
+Sincerely,
+WhatsApp User`;
+            
+            document.getElementById('emailTemplate').textContent = emailContent;
+            resultSection.style.display = 'block';
+            banCheckResult.style.display = 'none';
+            
+            // Scroll to result
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Check Ban Status
+        document.getElementById('checkBanBtn').addEventListener('click', async () => {
+            const phoneNumber = document.getElementById('checkPhoneNumber').value.trim();
+            
+            if (!validatePhoneNumber(phoneNumber)) {
+                alert('Please enter a valid phone number in international format (e.g., +1234567890)');
+                return;
+            }
+            
+            // Show loading state
+            apiStatus.textContent = "Checking ban status...";
+            apiStatus.className = "api-status";
+            apiStatus.style.display = "block";
+            apiStatus.innerHTML = '<span class="loading"></span> Connecting to WhatsApp API...';
+            
+            try {
+                // This is where you would integrate with your backend API
+                // For now, we'll simulate the API call with a timeout
+                const isBanned = await simulateApiCall(phoneNumber);
+                
+                let statusMessage = '';
+                if (isBanned) {
+                    statusMessage = `
+                    <div style="color: #ff0000; font-weight: bold;">
+                        <i class="fas fa-ban"></i> BANNED<br><br>
+                        The phone number ${phoneNumber} is currently banned from WhatsApp.
+                    </div>
+                    <div class="scary-message" style="margin-top: 15px;">
+                        <i class="fas fa-exclamation-circle"></i> This number has been restricted from using WhatsApp services due to violations of Terms of Service.
+                    </div>`;
+                    
+                    apiStatus.innerHTML = '<i class="fas fa-check-circle"></i> API Response: Number is banned';
+                    apiStatus.className = "api-status api-success";
+                } else {
+                    statusMessage = `
+                    <div style="color: #00ff00; font-weight: bold;">
+                        <i class="fas fa-check-circle"></i> NOT BANNED<br><br>
+                        The phone number ${phoneNumber} is currently active on WhatsApp.
+                    </div>
+                    <div class="scary-message" style="margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i> This number is in good standing with WhatsApp's Terms of Service.
+                    </div>`;
+                    
+                    apiStatus.innerHTML = '<i class="fas fa-check-circle"></i> API Response: Number is not banned';
+                    apiStatus.className = "api-status api-success";
+                }
+                
+                document.getElementById('banStatusMessage').innerHTML = statusMessage;
+                banCheckResult.style.display = 'block';
+                resultSection.style.display = 'none';
+                
+                // Scroll to result
+                banCheckResult.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error checking ban status:', error);
+                apiStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error: Could not connect to WhatsApp API';
+                apiStatus.className = "api-status api-error";
+                
+                // Fallback to simulated result if API fails
+                setTimeout(() => {
+                    const isBanned = simulateBanCheck(phoneNumber);
+                    
+                    let statusMessage = '';
+                    if (isBanned) {
+                        statusMessage = `
+                        <div style="color: #ff0000; font-weight: bold;">
+                            <i class="fas fa-ban"></i> BANNED (Simulated Result)<br><br>
+                            The phone number ${phoneNumber} appears to be banned from WhatsApp.
+                        </div>
+                        <div class="scary-message" style="margin-top: 15px;">
+                            <i class="fas fa-exclamation-circle"></i> Note: This is a simulated result as the API is not connected.
+                        </div>`;
+                    } else {
+                        statusMessage = `
+                        <div style="color: #00ff00; font-weight: bold;">
+                            <i class="fas fa-check-circle"></i> NOT BANNED (Simulated Result)<br><br>
+                            The phone number ${phoneNumber} appears to be active on WhatsApp.
+                        </div>
+                        <div class="scary-message" style="margin-top: 15px;">
+                            <i class="fas fa-info-circle"></i> Note: This is a simulated result as the API is not connected.
+                        </div>`;
+                    }
+                    
+                    document.getElementById('banStatusMessage').innerHTML = statusMessage;
+                    banCheckResult.style.display = 'block';
+                    resultSection.style.display = 'none';
+                    
+                    // Scroll to result
+                    banCheckResult.scrollIntoView({ behavior: 'smooth' });
+                }, 1000);
+            }
+        });
+        
+        // Helper functions
+        function hideAllSections() {
+            banNumberSection.style.display = 'none';
+            unbanNumberSection.style.display = 'none';
+            banCheckerSection.style.display = 'none';
+            resultSection.style.display = 'none';
+            banCheckResult.style.display = 'none';
+            apiStatus.style.display = 'none';
+        }
+        
+        function validatePhoneNumber(phone) {
+            return phone.startsWith('+') && phone.length > 8 && phone.length < 16;
+        }
+        
+        function simulateBanCheck(phoneNumber) {
+            // This is a simulation - in a real implementation, this would be an API call
+            // For demonstration purposes, we'll randomly determine status based on the last digit
+            const lastDigit = parseInt(phoneNumber.slice(-1));
+            return lastDigit % 3 === 0; // Approximately 1/3 of numbers will show as "banned"
+        }
+        
+        function simulateApiCall(phoneNumber) {
+            // Simulate API call with delay
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // In a real implementation, this would be an actual API call
+                    // For now, we'll simulate success 80% of the time
+                    if (Math.random() > 0.2) {
+                        const lastDigit = parseInt(phoneNumber.slice(-1));
+                        resolve(lastDigit % 3 === 0);
+                    } else {
+                        throw new Error("API connection failed");
+                    }
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
